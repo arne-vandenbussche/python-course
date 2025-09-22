@@ -1,3 +1,6 @@
+---
+title: Welcome
+---
 # Welcome in the Course Programming in Python
 
 This site contains the course material for the course Programming in Python taught at VIVES University of Applied Sciences, campus Kortrijk. 

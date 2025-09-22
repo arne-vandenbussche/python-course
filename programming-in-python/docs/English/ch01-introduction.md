@@ -12,7 +12,6 @@ The aim of this course is to provide a solid introduction to Python. A course un
 - Scripts or small projects to automate repititive tasks.
 - Automation of server tasks and security tasks.
 - Data analysis.
-- Algorithms for artificial intelligence.
 
 Topics that we will therefore not cover, or will cover in a very limited way, are:
 

@@ -126,7 +126,7 @@ print(my_text) # print as a list
 print("".join(my_test)) # concatenate each element in the list and print as text
 ```
 
-Er is ook een methode `readline()` om de lijnen één voor één in te lezen, of je kan zelfs eenvoudig itereren over het `TextIOWrapper` object:
+There is also a method `readline()` to read the lines one by one, or you can iterate over the `TextIOWrapper` object:
 
 ```python
 monty_python = open("monty_python.txt", 'r')
@@ -159,9 +159,9 @@ We of course know that we can make syntax errors. A syntax error activates the S
 
 ```python
 if False:
-  print("onbereikbaar")
+  print("cannot be reached")
 else
-  print("enig uitvoerbaar statement")
+  print("only executable statement")
 ```
 
 When running this code, we will get the following error:
@@ -287,7 +287,7 @@ except Exception as err:
 
 You can define **exception** yourself. This is done by creating a new exception class that inherits from `Exception`. This can be done directly of indirectly via a subclass of `Exception`.
 
-We kunnen tenslotte ook **zelf excepties definiëren**. Dat doe je door een nieuwe klasse aan te maken die erft van `Exception`. Dat kan direct of indirect via een subklasse van `Exception`. It is enough to pass the name of the superclass as a ‘parameter’ when defining the subclass to make the latter inherit from the former. It's a good idea to give all your own exceptions a name ending with `Error`.
+It is enough to pass the name of the superclass as a ‘parameter’ when defining the subclass to make the latter inherit from the former. It's a good idea to give all your own exceptions a name ending with `Error`.
 
 ```python
 class SpeedError(Exception):  # inherits from the class Exception

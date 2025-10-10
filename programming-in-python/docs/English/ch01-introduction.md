@@ -160,9 +160,10 @@ You could download and install SQLite from the [officiële homepagina](https://w
 
 The course consists of separate files that will be make available in the Toledo course in pdf format. Each chapter consists of three parts:
 
-* Course text.
+* Course text with theory and examples on this site.
 * Exercises.
 * Solutions to the exercises.
+* Supporting material such as lesson recording and YouTube movies.
 
 ### Extra movies
 
@@ -181,8 +182,6 @@ What is the best way to study this course? There are no secrets here. Study the 
 The next step is to make exercises. You decide how many exercises you make, but be sure to practice all key concepts. Make up your own examples to transfer your acquired knowledge to other contexts.
 
 Each chapter starts with a list of objectives. Use these as a checklist to make sure you master all the key concepts.
-
-Gebruik de doelstellingen bij het begin van elk hoofdstuk als checklist om na te gaan of je alles beheerst.
 
 Use the following principles of studying:
 * Spaced repitition.

@@ -162,9 +162,10 @@ Je zou SQLite kunnen downloaden en installeren van de [officiële homepagina](ht
 
 De cursus bestaat uit losse delen die in pdf-formaat beschikbaar gesteld zullen worden. Elk hoofdstuk zal uit minstens drie delen bestaan:
 
-* Een theoriegedeelte met de uitleg en voorbeelden.
+* Een theoriegedeelte met de uitleg en voorbeelden. Die vind je op deze site.
 * Oefeningen.
 * Oplossingen van oefeningen.
+* Ondersteunend materiaal zoals lesopnames of YouTubefimpjes.
 
 ### Extra filmpjes
 

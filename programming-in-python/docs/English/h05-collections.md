@@ -90,6 +90,56 @@ lst2.index("Victor") # 0
 lst2.index("Alice") # ValueError. 'Alice' is not in list
 ```
 
+### The `enumerate()` Function
+
+When you loop over a list, you often need both the **index** (position)
+and the **value** of each element.\
+You *could* keep track of the index yourself with a counter, but Python
+provides a much cleaner way: the built-in **`enumerate()`** function.
+
+#### Example without `enumerate()`
+
+``` python
+fruits = ["apple", "banana", "cherry"]
+
+index = 0
+for fruit in fruits:
+    print(index, fruit)
+    index += 1
+```
+
+#### Example with `enumerate()`
+
+``` python
+fruits = ["apple", "banana", "cherry"]
+
+for index, fruit in enumerate(fruits):
+    print(index, fruit)
+```
+
+Output:
+
+    0 apple
+    1 banana
+    2 cherry
+
+By default, `enumerate()` starts counting from `0`, but you can choose a
+different start index:
+
+``` python
+for index, fruit in enumerate(fruits, start=1):
+    print(index, fruit)
+```
+
+Output:
+
+    1 apple
+    2 banana
+    3 cherry
+
+This makes your code cleaner, more Pythonic, and less error-prone when
+you need both the index and the value of each item in a list.
+
 ### Add elements to a list
 
 Relevant functions to add elements to a list are **extend()**, **append()**, **insert()** and the **plus-operator**.
@@ -128,7 +178,7 @@ print(lst3.pop())  # remove last element from the list
 print(lst3)
 print(lst3.pop(0))  # remove element at index 0
 print(lst3)
-lst2.remove("Norbert")  # remove element "Norbert" 
+lst2.remove("Norbert")  # remove element "Norbert"
 del lst2[-1]  # remove last element
 print(lst2)
 ```
@@ -138,7 +188,7 @@ print(lst2)
 Reversing a list:
 
 ```python
-lst2.reverse() 
+lst2.reverse()
 print(lst2) # ['Korneel', 'Joris', 'Piet', 'Jan']
 lst2 = lst2[::-1]
 print(lst2) # ['Jan', 'Piet', 'Joris', 'Korneel']
@@ -185,7 +235,7 @@ print("abc3:", abc3) # abc3: ['a', 'b', 'c', 'd', 'e']
 
 In the context op copying it is worthwhile to point out the difference between the operators `==` and `is`. The operator `==` checks whether the contents of two variables is equal (value equality), while `is` checks whether the references are equal (reference equality).
 
-```python 
+```python
 abc3.pop()  # remove "e"
 print("abc1:", abc1)
 print("abc3:", abc3)
@@ -209,7 +259,7 @@ Iterating tuples is faster than with lists because they are immutable. When you 
 
 ### Create a tuple
 
-Tuples consists of a list of values between brackets, separated by a comma. 
+Tuples consists of a list of values between brackets, separated by a comma.
 
 ```python
 t1 = ("apple", "mango")
@@ -275,9 +325,9 @@ print(tuple_fruit) # ('mango', 'cherry', 'banana', 'apple')
 As with lists you can use the function **len()** to count the number of elements in the tuple.
 
 ```python
-t1 = ("apple", "mango") 
-t2 = ("apple", 3, 1.4) 
-t3 = ("apple", 3, 1.4, ("banana", 5)) 
+t1 = ("apple", "mango")
+t2 = ("apple", 3, 1.4)
+t3 = ("apple", 3, 1.4, ("banana", 5))
 print(len(t1)) # 2
 print(len(t2)) # 3
 print(len(t3))  # 4
@@ -286,7 +336,7 @@ print(len(t3))  # 4
 As with lists, you can access individual elements using the **index**. You can also use **slicing**.
 
 ```python
-fruit = ("apple", "banana", "cherry", "strawberry") 
+fruit = ("apple", "banana", "cherry", "strawberry")
 print(fruit[2])  # third element (cherry) as indices start at 0
 print(fruit[1:4]) # ('banana, 'cherry', 'strawberry')
 print(type(fruit[1:4])) # <class 'tuple'>
@@ -376,7 +426,7 @@ print(repeated_tuple) # (1, 2, 3, 1, 2, 3, 1, 2, 3)
 As for lists, tuples with numerical values can be used with **sum()**, **max()** and **min()**.
 
 ```python
-t1 = (327, 419, 101, 667, 925, 225) 
+t1 = (327, 419, 101, 667, 925, 225)
 print(max(t1)) # 925
 print(min(t1)) # 101
 print(sum(t1)) # 2664
@@ -452,7 +502,7 @@ print(s) # {1, 2, 3}
 If you want to create a set consisting of the different letters of a string, you can call set() with the string as argument. Again, duplicate letters are automatically ignored:
 
 ```python
-helloset = set("hello world") 
+helloset = set("hello world")
 print(helloset) # {'w', 'l', 'e', ' ', 'r', 'o', 'd', 'h'}
 ```
 
@@ -551,7 +601,7 @@ print(computers1.union(computers2)) # {'Apple', 'Acer', 'Asus', 'HP', 'Dell', 'L
 my_intersection = computers1.intersection(computers2)
 print(computers1)
 print(computers2)
-print(my_intersection) # {'Asus', 'Dell'}   
+print(my_intersection) # {'Asus', 'Dell'}
 
 # isdisjoint (disjunction), have no common elements
 print(computers1.isdisjoint(computers2))  # False because intersection is not empty
@@ -592,13 +642,13 @@ print("A1 == A4:", A1 == A4)  # A1 == A4: True
 You cannot sort the elements in a set as long as they are in the set. However, you can use a list casting to convert the set into a list, and then sort that list. That way, you can be sure in which order the elements will be traversed when you apply a loop:
 
 ```python
-fruitset = { ‘apple’, ‘banana’, ‘cherry’, ‘strawberry’, ‘mango’} 
+fruitset = { ‘apple’, ‘banana’, ‘cherry’, ‘strawberry’, ‘mango’}
 for element in fruitset: # are passed through unordered
-	print(element, end=", ") 
+	print(element, end=", ")
 # cherry banana strawberry mango apple
-print() 
+print()
 
-fruitlist = list(fruitset) # convert set to list 
+fruitlist = list(fruitset) # convert set to list
 fruitlist.sort() # sort elements
 for element in fruitlist: # list is sorted
 	print(element)
@@ -612,13 +662,13 @@ Python has the **frozenset** as a variant of the **set** type . You create a fro
 The use of frozensets is that they are faster than sets.
 
 ```python
-ruit1 = frozenset(["apple", "banana", "cherry"]) 
-fruit2 = frozenset(["banana", "cherry", "strawberry"]) 
+ruit1 = frozenset(["apple", "banana", "cherry"])
+fruit2 = frozenset(["banana", "cherry", "strawberry"])
 print(fruit1.union(fruit2))    # frozenset({'banana', 'strawberry', 'cherry', 'apple'})
 ```
 
 ```python
-fruit1.add("pear")  
+fruit1.add("pear")
 ```
 
 ```bash
@@ -671,7 +721,7 @@ Dictionaries are heterogeneous. The elements can be of different data types.
 
 ```python
 person = {'name': "Jos", 'age': 58, 'car': car}
-print(person) 
+print(person)
 # {'name': 'Jos', 'age': 58, 'car': {'brand': 'Ford', 'model': 'Mustang', 'year': 1964}}
 ```
 
@@ -869,14 +919,14 @@ This is a good time to dive into sorting. What we explain here about sorting app
 The sort() function modifies the list. By default, sorting is done in ascending order, but it can also be done in descending order.
 
 ```python
-fruitlist = ["apple", "strawberry", "banana", "raspberry", 
-             "cherry", "banana", "durian", "mango"] 
+fruitlist = ["apple", "strawberry", "banana", "raspberry",
+             "cherry", "banana", "durian", "mango"]
 fruitlist.sort()
 print(fruitlist)
 # ['apple', 'banana', 'banana', 'cherry', 'durian', 'mango', 'raspberry', 'strawberry']
 
-numlist = [314, 315, 642, 246, 129, 999] 
-numlist.sort(reverse=True) 
+numlist = [314, 315, 642, 246, 129, 999]
+numlist.sort(reverse=True)
 print(numlist)
 # [999, 642, 315, 314, 246, 129]
 ```
@@ -896,13 +946,13 @@ Help on method_descriptor:
 
 sort(self, /, *, key=None, reverse=False)
     Sort the list in ascending order and return None.
-    
+
     The sort is in-place (i.e. the list itself is modified) and stable (i.e. the
     order of two equal elements is maintained).
-    
+
     If a key function is given, apply it once to each list item and sort them,
     ascending or descending, according to their function values.
-    
+
     The reverse flag can be set to sort in descending order.
 ```
 
@@ -951,7 +1001,7 @@ letters = "azertyuiopqsdfghjklm"
 sorted_letters = sorted(letters)
 # ['a', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'o', 'p', 'q', 'r', 's', 't', 'u', 'y', 'z']
 sorted_string = "".join(sorted_letters)
-print(sorted_string)  
+print(sorted_string)
 # adefghijklmopqrstuyz
 ```
 
@@ -1118,7 +1168,7 @@ There is in fact a shorter way to do this, using the zip function.
 ```python
 countries = ('Belgium', 'France', 'Germany', 'Italy', 'Spain')
 cities = ('Brussels', 'Paris', 'Berlin', 'Rome', 'Madrid')
-my_dict = zip(countries, cities) 
+my_dict = zip(countries, cities)
 # {'Belgium': 'Brussels', 'France': 'Paris', 'Germany': 'Berlin', 'Italy': 'Rome', 'Spain': 'Madrid'}
 ```
 
@@ -1245,4 +1295,3 @@ person_json = json.dumps(person) # '{"name": "John", "age": 30, "city": "New Yor
 # Convert JSON back to a dictionary
 person_dict = json.loads(person_json)
 ```
-

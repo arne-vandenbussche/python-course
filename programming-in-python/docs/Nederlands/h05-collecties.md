@@ -65,7 +65,7 @@ print(lst1) # [1, 2, 3, 10]
 print(lst3[-1])  # [1, 2, 3, 10] laatste element in lst3 is lst1 en is dus ook gewijzigd!
 ```
 
-### De in-operator
+### Een lijst doorlopen en zoeken in een lijst
 
 Met een **for**-lus en de **in**-operator kan je de verschillende elementen van een list overlopen:
 
@@ -82,6 +82,63 @@ if "Piet" in lst2:
 else:
   print("Piet heeft geen baard...")
 ```
+
+Je kan ook de index van een element opvragen:
+
+```python
+lst2.index("Victor") # 0
+lst2.index("Alice") # ValueError. 'Alice' is not in list
+```
+### De functie `enumerate()`
+
+Wanneer je over een lijst iterereert, heb je vaak zowel de **index**
+(positie) als de **waarde** van elk element nodig.\
+Je *zou* zelf een teller kunnen bijhouden, maar Python biedt een veel
+elegantere manier: de ingebouwde functie **`enumerate()`**.
+
+#### Voorbeeld zonder `enumerate()`
+
+``` python
+fruits = ["appel", "banaan", "kers"]
+
+index = 0
+for fruit in fruits:
+    print(index, fruit)
+    index += 1
+```
+
+#### Voorbeeld met `enumerate()`
+
+``` python
+fruits = ["appel", "banaan", "kers"]
+
+for index, fruit in enumerate(fruits):
+    print(index, fruit)
+```
+
+Uitvoer:
+
+    0 appel
+    1 banaan
+    2 kers
+
+Standaard begint `enumerate()` te tellen vanaf `0`, maar je kunt ook een
+andere startindex opgeven:
+
+``` python
+for index, fruit in enumerate(fruits, start=1):
+    print(index, fruit)
+```
+
+Uitvoer:
+
+    1 appel
+    2 banaan
+    3 kers
+
+Dit maakt je code overzichtelijker, meer "Pythonic", en minder
+foutgevoelig wanneer je zowel de index als de waarde van elk element in
+een lijst nodig hebt.
 
 ### Elementen toevoegen
 
@@ -119,7 +176,7 @@ print(lst2)
 Een list kan je omdraaien op de volgende manieren:
 
 ```python
-lst2.reverse() 
+lst2.reverse()
 print(lst2) # ['Korneel', 'Joris', 'Piet', 'Jan']
 lst2 = lst2[::-1]
 print(lst2) # ['Jan', 'Piet', 'Joris', 'Korneel']
@@ -244,7 +301,7 @@ print(t) # (2,)
 print(type(t)) # <class 'tuple'>
 ```
 
- Wanneer je zou schrijven 
+ Wanneer je zou schrijven
 
 > t = (2)
 
@@ -261,9 +318,9 @@ print(type(t)) # <class 'int'>
 Net als bij lists kan je de **len()** functie gebruiken om te bepalen hoeveel elementen een tuple bevat:
 
 ```python
-t1 = ("appel", "mango") 
-t2 = ("appel", 3, 1.4) 
-t3 = ("appel", 3, 1.4, ("banaan", 5)) 
+t1 = ("appel", "mango")
+t2 = ("appel", 3, 1.4)
+t3 = ("appel", 3, 1.4, ("banaan", 5))
 print(len(t1)) # 2
 print(len(t2)) # 3
 print(len(t3))  # 4
@@ -276,8 +333,8 @@ Merk op dat in dit voorbeeld de lengte van t3 gelijk is aan 4, en niet 5. Het la
 Je kunt met de **in**-operator een **for**-lus gebruiken om de elementen van een tuple te doorlopen, net als bij een list:
 
 ```python
-t1 = ("appel", 3, 1.4, ("banaan", 5)) 
-for element in t1: 
+t1 = ("appel", 3, 1.4, ("banaan", 5))
+for element in t1:
   print(element)
 ```
 
@@ -285,7 +342,7 @@ for element in t1:
 Met diezelfde **in**-operator kan je ook testen of een element onderdeel van een tuple is:
 
 ```python
-t1 = ("appel", "banaan", "kers") 
+t1 = ("appel", "banaan", "kers")
 print("banaan" in t1) # True
 print("mango" in t1) # False
 ```
@@ -295,7 +352,7 @@ print("mango" in t1) # False
 Zoals we eerder al gezien hebben staat Python toe om meerdere  variabelen links van de assignment operator te plaatsen (unpacking). In feite vormen die variabelen samen een tuple. Dit is een uitzondering op de regel dat slechts één variabele links van de assignment operator staat. De  waardes aan de rechterkant worden één voor één naar de linkerkant  gekopieerd, van links naar rechts.
 
 ```python
-a, b = "appel", "banaan" 
+a, b = "appel", "banaan"
 print(a) # appel
 print(b) # banaan
 ```
@@ -318,7 +375,7 @@ print(a) # (1, 2, 3)
 Hieronder is een voorbeeld waarin het plaatsen van ronde haakjes noodzakelijk is:
 
 ```python
-t1, t2 = ("apple", "banaan"), "kers" 
+t1, t2 = ("apple", "banaan"), "kers"
 print(t1) # ('apple', 'banaan')
 print(t2) # kers
 ```
@@ -364,7 +421,7 @@ De functie stats (afkorting voor statistics) kan als inputargument  een list of 
 Net als bij lists, kan je individuele elementen van een tuple benaderen via **indices**:
 
 ```python
-fruit = ("appel", "banaan", "kers", "doerian") 
+fruit = ("appel", "banaan", "kers", "doerian")
 print(fruit[2])  # derde element, want indices beginnen bij 0 (kers dus)
 ```
 
@@ -399,7 +456,7 @@ print()
 i = 0
 while i < len(fruit):
   print(fruit[i])
-  i += 1 
+  i += 1
 ```
 
 De versie met in-operator is echter eenvoudiger en meer leesbaar. We raden deze ook aan.
@@ -450,7 +507,7 @@ print(tuple_fruit) # ('mango', 'kers', 'banaan', 'appel')
 Net als bij lists kan je de **max()** en de **min()** functies gebruiken om het maximum respectievelijk het minimum te  bepalen van een tuple die bestaat uit getallen. Je kunt de elementen van een tuple met numerieke elementen bij elkaar optellen met de **sum()** functie:
 
 ```python
-t1 = (327, 419, 101, 667, 925, 225) 
+t1 = (327, 419, 101, 667, 925, 225)
 print(max(t1)) # 925
 print(min(t1)) # 101
 print(sum(t1)) # 2664
@@ -539,7 +596,7 @@ Sets hebben de volgende eigenschappen:
 Om een set te creëren waarin al elementen zitten, plaats je die  elementen tussen accolades. Als alternatief kun je de set() functie  aanroepen en een list met de elementen als argument doorgeven.
 
 ```python
-fruitset = {"appel", "banaan", "kers"} 
+fruitset = {"appel", "banaan", "kers"}
 print(fruitset)  # {'banaan', 'appel', 'kers'}
 s = set([1, 2, 3])
 print(s) # {1, 2, 3}
@@ -555,7 +612,7 @@ print(s) # {1, 2, 3}
  Als je een set wilt creëren bestaande uit de verschillende letters  van een string, dan kun je set() aanroepen met de string als argument.  Ook hier worden dubbele letters automatisch genegeerd:
 
 ```python
-helloset = set("hello world") 
+helloset = set("hello world")
 print(helloset) # {'w', 'l', 'e', ' ', 'r', 'o', 'd', 'h'}
 ```
 
@@ -602,9 +659,9 @@ print(len(set())) # 0
 Je kan de in-operator en een for-lus gebruiken om een set te  doorlopen. De variabele van de for-lus krijgt toegang tot alle element  van de set. Er is echter geen manier om te bepalen in welke volgorde je  de elementen te zien krijgt, omdat een set per definitie ongeordend is.
 
 ```python
-fruitmand = { "appel", "banaan", "kers", "doerian", "mango" } 
-for fruit in fruitmand: 
-  print(fruit) 
+fruitmand = { "appel", "banaan", "kers", "doerian", "mango" }
+for fruit in fruitmand:
+  print(fruit)
 ```
 
 ```
@@ -623,7 +680,7 @@ Met de in-operator kan je ook nagaan of een element tot de set behoort:
 if "peer" in fruitmand:
   print("Er liggen peren in de fruitmand")
 else:
-  print("Er ligt geen peer in de fruitmand") 
+  print("Er ligt geen peer in de fruitmand")
 ```
 
 ```
@@ -636,7 +693,7 @@ De in-operator is de enige manier toegang te krijgen tot de elementen van een se
 fruitmand[2]
 ```
 
-​    
+​
 
 ```
 ---------------------------------------------------------------------------
@@ -748,7 +805,7 @@ De doorsnede van twee (of meer) sets krijg je met methode **intersection()**:
 doorsnede = computers1.intersection(computers2)
 print(computers1)
 print(computers2)
-print(doorsnede)    
+print(doorsnede)
 ```
 
 ```
@@ -763,7 +820,7 @@ Om het verschil tussen twee (of meer) sets te krijgen, maak je gebruik van de me
 verschil = computers1.difference(computers2)
 print(computers1)
 print(computers2)
-print(verschil)    
+print(verschil)
 ```
 
 ```
@@ -791,7 +848,7 @@ A = {1, 2, 3}
 B = {1, 2, 3, 4, 5}
 
 print(A.issubset(B))  # True want A is deelverzameling van B
-print(B.issuperset(A))  # True om dezelfde reden  
+print(B.issuperset(A))  # True om dezelfde reden
 ```
 
 ```
@@ -811,7 +868,7 @@ print("A1 is A2:", A1 is A2)  # True want dezelfde referentie
 
 A3 = A1.copy()  # A3 is een nieuwe set met dezelfde waarden als A1
 print("A1 == A3:", A1 == A3)  # True want dezelfde waarden
-print("A1 is A3:", A1 is A3)  # False want verschillende referenties   
+print("A1 is A3:", A1 is A3)  # False want verschillende referenties
 ```
 
 ```
@@ -825,7 +882,7 @@ Omdat sets niet geordend zijn is A4 gelijk aan A1, ook al werden de elementen in
 
 ```python
 A4 = {3, 2, 1}
-print("A1 == A4:", A1 == A4)  
+print("A1 == A4:", A1 == A4)
 ```
 
 ```
@@ -837,13 +894,13 @@ A1 == A4: True
 Je kan de elementen in een set niet sorteren zolang ze in de set  zitten. Je kan echter wel met een list casting de set omzetten in een  list, en die list dan sorteren. Op die manier weet je zeker in welke  volgorde de elementen worden doorlopen als je een lus toepast:
 
 ```python
-fruitset = {"appel", "banaan", "kers", "doerian", "mango"} 
+fruitset = {"appel", "banaan", "kers", "doerian", "mango"}
 for element in fruitset:  # worden ongeordend doorlopen
-  print(element) 
+  print(element)
 
-print() 
+print()
 
-fruitlist = list(fruitset)  # set omzetten naar list 
+fruitlist = list(fruitset)  # set omzetten naar list
 fruitlist.sort()  # elementen sorteren
 for element in fruitlist:  # worden geordend doorlopen
   print(element)
@@ -868,9 +925,9 @@ mango
 Python kent als variant op het **set** type de **frozenset**. Je creëert een frozenset via de frozenset() constructor. Zoals de naam  laat vermoeden kunnen de elementen van een frozenset niet veranderd  worden. Je creëert dus een frozenset onmiddellijk als je de frozenset()  constructor aanroept, want zodra de frozenset bestaat kun je geen  elementen meer toevoegen of weghalen. Met andere woorden, frozensets  zijn, in tegenstelling tot gewone sets, **onveranderbaar**  (Engels: immutable).  Alle reguliere set methodes werken ook op frozensets, behalve de  methodes die proberen de set te veranderen (bijv. add() om elementen toe te voegen of remove() om elementen te verwijderen). Als je een  dergelijke methode probeert aan te roepen voor een frozenset krijg je  een syntax error.
 
 ```python
-fruit1 = frozenset(["appel", "banaan", "kers"]) 
-fruit2 = frozenset(["banaan", "kers", "doerian"]) 
-print(fruit1.union(fruit2))     
+fruit1 = frozenset(["appel", "banaan", "kers"])
+fruit2 = frozenset(["banaan", "kers", "doerian"])
+print(fruit1.union(fruit2))
 ```
 
 ```
@@ -915,7 +972,7 @@ Dictionaries creëer je met accolades {}, vergelijkbaar met hoe je  lists creëe
   Hieronder bouwen we een dictionary fruitmand, met drie elementen,  namelijk de key "appel" met waarde 3, de key "banaan" met waarde 5, en  de key "kers" met waarde 50. De getallen kan je bijvoorbeeld  interpreteren als het aantal stukken van een bepaalde fruitsoort in de  mand:
 
 ```python
-fruitmand = { "appel":3, "banaan":5, "kers":50 } 
+fruitmand = { "appel":3, "banaan":5, "kers":50 }
 print(fruitmand)
 ```
 
@@ -927,7 +984,7 @@ Je kan ook de **dict()** constructor gebruiken. Let wel op dat je hier geen dubb
 
 ```python
 auto = dict(merk="Ford", model="Mustang", jaar=1964)
-print(auto)  
+print(auto)
 ```
 
 ```
@@ -980,7 +1037,7 @@ print(fruitmand["banaan"]) # 5
 
 ```python
 aantal_kersen = fruitmand.get("kers")
-print(f"Er zijn {aantal_kersen} kersen in de fruitmand")  
+print(f"Er zijn {aantal_kersen} kersen in de fruitmand")
 ```
 
 ```
@@ -990,7 +1047,7 @@ Er zijn 50 kersen in de fruitmand
 Een element van een dictionary in een dictionary opvragen:
 
 ```python
-print("{} rijdt met een {}".format(persoon["naam"], 
+print("{} rijdt met een {}".format(persoon["naam"],
                                    persoon["auto"]["merk"]))
 ```
 
@@ -1021,7 +1078,7 @@ Om elementen in een dictionary te wijzigen maak je ook gebruik van de vierkante 
 print(fruitmand)
 fruitmand["banaan"] = 3  # 3 bananen ipv 5
 fruitmand["appel"] += 1  # 1 appel toevoegen
-print(fruitmand)   
+print(fruitmand)
 ```
 
 ```
@@ -1063,7 +1120,7 @@ De waarden (in dit geval het aantal stukken fruit) kan je op de volgende manier 
 print("In de fruitmand ligt:")
 for fruit in fruitmand:
   aantal = fruitmand[fruit]
-  print(aantal, fruit) 
+  print(aantal, fruit)
 ```
 
 ```
@@ -1120,7 +1177,7 @@ for value in auto.values():
 ```
 
 ```
-Ford Mustang 1964 
+Ford Mustang 1964
 ```
 
 Maar let op! Omdat dictionaries ongeordend zijn, ligt de volgorde niet vast.
@@ -1170,7 +1227,7 @@ Je kan ook de **del** operator gebruiken:
 os = dict(naam="Windows", versie=10, opensource=False)
 print(os)
 del os["versie"]
-print(os)  
+print(os)
 ```
 
 ```
@@ -1182,7 +1239,7 @@ Met methode **clear()** maak je de volledige dictionary leeg:
 
 ```python
 os.clear()
-print(os) 
+print(os)
 ```
 
 ```
@@ -1195,7 +1252,7 @@ Met de methode **update()** kan je een dictionary aan een andere dictionary toev
 
 ```python
 fruitmand.update({"peer": 5, "kiwi": 2})
-print(fruitmand)   
+print(fruitmand)
 ```
 
 ```
@@ -1206,7 +1263,7 @@ Wanneer de toegevoegde dictionary een element bevat met een key die  ook in de a
 
 ```python
 fruitmand.update({"banaan": 5})
-print(fruitmand) 
+print(fruitmand)
 ```
 
 ```
@@ -1219,7 +1276,7 @@ Bemerk dat in dit geval geen nieuwe (derde) dictionary wordt  gecreëerd. Wil je
 d1 = {"naam" : "Jos", "leeftijd" :  56}
 d2 = {"functie" : "systeembeheerder"}
 d3 = dict(list(d1.items()) + list(d2.items()))
-print(d3)    
+print(d3)
 ```
 
 ```
@@ -1259,14 +1316,14 @@ Het is een goed moment om even in te gaan op het sorteren. Wat we hier vertellen
 De functie sort() wijzigt de lijst. Standaard sorteren we in stijgende volgorde, maar het kan ook in dalende volgorde.
 
 ```python
-fruitlist = ["appel", "aardbei", "banaan", "framboos", 
-             "kers", "banaan", "doerian", "mango"] 
+fruitlist = ["appel", "aardbei", "banaan", "framboos",
+             "kers", "banaan", "doerian", "mango"]
 fruitlist.sort()
 print(fruitlist)
 # ['aardbei', 'appel', 'banaan', 'banaan', 'doerian', 'framboos', 'kers', 'mango']
 
-numlist = [314, 315, 642, 246, 129, 999] 
-numlist.sort(reverse=True) 
+numlist = [314, 315, 642, 246, 129, 999]
+numlist.sort(reverse=True)
 print(numlist)
 # [999, 642, 315, 314, 246, 129]
 ```
@@ -1286,13 +1343,13 @@ Help on method_descriptor:
 
 sort(self, /, *, key=None, reverse=False)
     Sort the list in ascending order and return None.
-    
+
     The sort is in-place (i.e. the list itself is modified) and stable (i.e. the
     order of two equal elements is maintained).
-    
+
     If a key function is given, apply it once to each list item and sort them,
     ascending or descending, according to their function values.
-    
+
     The reverse flag can be set to sort in descending order.
 ```
 
@@ -1343,7 +1400,7 @@ gesorteerde_letterbrij = sorted(letterbrij)
 gesorteerde_letterbrij_als_string = ""
 for letter in gesorteerde_letterbrij:
 	gesorteerde_letterbrij_als_string += letter
-print(gesorteerde_letterbrij_als_string)  
+print(gesorteerde_letterbrij_als_string)
 # adefghijklmopqrstuyz
 ```
 
@@ -1370,7 +1427,7 @@ print(list(filter(lambda persoon: persoon[1] >= 170, personen)))
 
 De functie `map()` heeft twee argumenten, een functie en een lijst. Het creëert een map-object waarbij de functie werd toegepaste op elk element van de lijst. Dit object converteren we opnieuw naar een lijst. Een voorbeeld maakt dit duidelijk:
 
-```python 
+```python
 getallen = [1, 3, 5, 7, 8]
 kwadraat = lambda x: x**2
 getallen_in_kwadraat = list(map(kwadraat, getallen))
@@ -1540,7 +1597,7 @@ print(output)
 Met een dictionary comprehension kan het weer in één lijn:
 
 ```python
-print({i: i ** 3 for i in input if i % 2 == 1})   
+print({i: i ** 3 for i in input if i % 2 == 1})
 ```
 
 ```
@@ -1649,7 +1706,7 @@ y = json.loads(x)
 print("Volledige JSON:",y)
 
 # Het resultaat is een Python dictionary:
-print("Het argument leeftijd is:",y["leeftijd"]) 
+print("Het argument leeftijd is:",y["leeftijd"])
 ```
 
 Met `json.dumps)` zetten we dan een dictionary of een list van dictionaries om naar json.
@@ -1666,7 +1723,7 @@ x = {
 y = json.dumps(x)
 
 # the result is a JSON string:
-print(y) 
+print(y)
 ```
 
 ```python
@@ -1703,4 +1760,3 @@ print(json_string)
     }
 ]
 ```
-

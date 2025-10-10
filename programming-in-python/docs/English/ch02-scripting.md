@@ -99,7 +99,7 @@ The comparison operators in Python look like this:
 | `is`     | object equality          |
 | `is not` | object inequality        |
 
-### Text 
+### Text
 
 Text of `str` should be put between single or double quotes. The following statements are equivalent:
 
@@ -147,7 +147,7 @@ Keep in mind that string are **immutable**. A changed string is printed or assig
 
 Examples:
 
-```python 
+```python
 print("VIVES University").lower() # vives university
 print("VIVES University").upper() # VIVES UNIVERSITY
 print("vives university").title() # Vives University
@@ -185,7 +185,7 @@ message = "Hello, World!"
 print(message[2:5]) # result: llo
 ```
 
- The start `i1` of the slice `i1:i2` can be omitted if  `i1` is the first index, and `i2` can be omitted if  `i2`  is the last index:      
+ The start `i1` of the slice `i1:i2` can be omitted if  `i1` is the first index, and `i2` can be omitted if  `i2`  is the last index:
 
 ```python
 print(message[:5]) # result: Hello
@@ -265,7 +265,7 @@ print("The square is this number is " + int(my_number)**2)
 
 ## Make desisions (if)
 
-Python uses the traditional `if`. 
+Python uses the traditional `if`.
 
 ```python
 speed = 31.54
@@ -336,10 +336,10 @@ A comment that spans multiple lines begins and ends with `'''` or `"""`.
 Sometimes you want to spread a long statement over multiple lines. You can use a backslash at the end of the line as a continuation symbol.
 
 ```python
-if school1[1] == school2[1] 
+if school1[1] == school2[1]
         and school1[2] == school2[2] \
         and school1[3] == school2[3] \
-        and school1[4] == school[4]: 
+        and school1[4] == school[4]:
         return True
 else:
         return False
@@ -351,7 +351,7 @@ An alternative method is to include your code in rounded brackets, square bracke
  if (school1[1] == school2[1]
         and school1[2] == school2[2]
         and school1[3] == school2[3]
-        and school1[4] == school2[4]): 
+        and school1[4] == school2[4]):
         return True
     else:
         return False
@@ -360,7 +360,7 @@ An alternative method is to include your code in rounded brackets, square bracke
 If you want a string to run over multiple lines, you can use the same method, of work with triple quotes. In the latter case the line break is included in the string.
 
 ```python
-my_text = """Python is 
+my_text = """Python is
 a very readable
 programming language
 """
@@ -370,7 +370,7 @@ print(my_text)
 This code will produce the following output:
 
 ```
-Python is 
+Python is
 a very readable
 programming language
 ```
@@ -414,13 +414,13 @@ my_list.append("boat") # ['bike', 'car', 'boat']
 
 We will learn more about lists later.
 
-## Iteration 
+## Iteration
 
 When an element is "iterable" , that means that you can go through is as a list, use the `for`-loop. Strings as well as lists are iterable.
 
 ```python
 my_list = ["car", "bike", "airplane", "step"]
-for item in my_list:     
+for item in my_list:
     print(item)
 ```
 
@@ -480,7 +480,7 @@ You can add extra formatting using the function `format()'. A few examples may i
 
 ```python
 text = "Python"
-centered_text = "{:^10}".format(text)
+centered_text = "{:^10}".format(text) # Alternative notation: centered_text = f"{text:^10}"
 print(centered_text)
 ```
 
@@ -490,7 +490,7 @@ This Python code with center the text 'Python' in a field of 10 characters.
 
 ```python
 text = "Python"
-left_aligned_text = "{:<10}".format(text)
+left_aligned_text = f"{text:<10}"
 print(left_aligned_text)
 ```
 
@@ -498,7 +498,7 @@ print(left_aligned_text)
 
 ```python
 text = "Python"
-right_aligned_text = "{:>10}".format(text)
+right_aligned_text = f"{text:>10}"
 print(right_aligned_text)
 ```
 
@@ -512,7 +512,7 @@ print(rounded_output)
 
 The output will show the number with two decimals: `3.14`.
 
-You can use the `f`-notation to get the same effect. 
+You can use the `f`-notation to get the same effect.
 
 ```python
 my_number = 3.14159265

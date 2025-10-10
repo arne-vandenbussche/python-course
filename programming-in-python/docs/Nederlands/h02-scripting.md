@@ -99,7 +99,7 @@ De vergelijkingsoperatoren zien er in Python zo uit:
 | `is`     | objectgelijkheid          |
 | `is not` | objectongelijkheid        |
 
-### Tekst 
+### Tekst
 
 Tekst of `str` kunnen we tussen enkele of dubbele aanhalingstekens zetten. De volgende statements zijn dus gelijk:
 
@@ -147,7 +147,7 @@ Bedenk dat strings **onwijzigbaar** zijn. Een gewijzigde string druk je af of ke
 
 Voorbeelden:
 
-```python 
+```python
 print("Vives Hogeschool").lower() # vives hogeschool
 print("Vives Hogeschool").upper() # VIVES HOGESCHOOL
 print("vives hogeschool").title() # Vives Hogeschool
@@ -185,7 +185,7 @@ boodschap = "Hello, World!"
 print(boodschap[2:5]) # resultaat: llo
 ```
 
- De start `i1` van de slice `i1:i2` mag je echter         weglaten als `i1` de eerste index is, en `i2`         mag je weglaten als `i2` de laatste index is:      
+ De start `i1` van de slice `i1:i2` mag je echter         weglaten als `i1` de eerste index is, en `i2`         mag je weglaten als `i2` de laatste index is:
 
 ```python
 print(boodschap[:5]) # resultaat: Hello
@@ -335,13 +335,13 @@ Commentaar van meerdere regels laat je starten en beginnen met `'''` of `"""`.
 
 ## Meerdere regels
 
-Soms gebeurt het dat een commando over meerdere regels loopt. In dat geval eindig je de regel met een backslash `\` 
+Soms gebeurt het dat een commando over meerdere regels loopt. In dat geval eindig je de regel met een backslash `\`
 
 ```python
-if school1[1] == school2[1] 
+if school1[1] == school2[1]
         and school1[2] == school2[2] \
         and school1[3] == school2[3] \
-        and school1[4] == school[4]: 
+        and school1[4] == school[4]:
         return True
 else:
         return False
@@ -353,16 +353,16 @@ Een alternatieve methode is om de code in ronde haakjes, vierkante haakjes of ac
  if (school1[1] == school2[1]
         and school1[2] == school2[2]
         and school1[3] == school2[3]
-        and school1[4] == school2[4]): 
+        and school1[4] == school2[4]):
         return True
     else:
         return False
 ```
 
-Als je een stuk tekst, een string over meerdere regels wil laten lopen, kan je dezelfde methode toepassen als hierboven, of werken met een opeenvolging van drie aanhalingstekens. Het overgaan van een nieuwe regel wordt in dat laatste geval ook letterlijk genomen. 
+Als je een stuk tekst, een string over meerdere regels wil laten lopen, kan je dezelfde methode toepassen als hierboven, of werken met een opeenvolging van drie aanhalingstekens. Het overgaan van een nieuwe regel wordt in dat laatste geval ook letterlijk genomen.
 
 ```python
-my_text = """Python is 
+my_text = """Python is
 a very readable
 programming language
 """
@@ -372,7 +372,7 @@ print(my_text)
 Deze code zal de volgende output opleveren:
 
 ```
-Python is 
+Python is
 a very readable
 programming language
 ```
@@ -416,13 +416,13 @@ my_list.append("boat") # ['bike', 'car', 'boat']
 
 Meer details over lijsten volgt nog later.
 
-## Iteratie of herhaling 
+## Iteratie of herhaling
 
 Wanneer een elementer "iterable" is, dat bekent dat het als een lijst doorlopen kan worden, dan is de `for`-lus de meest aangewezen manier om dat te doen. Zowel strings als lists zijn iterable.
 
 ```python
 myList = ["car", "bike", "airplane", "step"]
-for item in myList:     
+for item in myList:
     print(item)
 ```
 
@@ -454,7 +454,7 @@ if isinstance(getal, (float, int)):
   print("Het kwadraat van dit getal is", getal**2)
 ```
 
-In vele gevallen willen we echter dat onze output op een verzorgde manier gepresenteerd wordt en mengen we ook variabelen met letterlijke tekst. 
+In vele gevallen willen we echter dat onze output op een verzorgde manier gepresenteerd wordt en mengen we ook variabelen met letterlijke tekst.
 
 De eenvoudigste manier om dit aan te pakken is om de letter 'f' voor de dubbele aanhalingstekens te zetten. Als je dan binnen dit tekst een variabele wil gebruiken, dan zet je die tussen accolades.
 
@@ -481,7 +481,7 @@ Naast het eenvoudigweg invoegen van waarden in een string, kun je met de `format
 
 ```python
 tekst = "Python"
-gecentreerde_tekst = "{:^10}".format(tekst)
+gecentreerde_tekst = "{:^10}".format(tekst) # alternatieve notatie: centered_text = f"{text:^10}"
 print(gecentreerde_tekst)
 ```
 
@@ -491,7 +491,7 @@ Deze code zal het woord 'Python' centreren in een veld van 10 tekens breed.
 
 ```python
 tekst = "Python"
-links_uitgelijnde_tekst = "{:<10}".format(tekst)
+links_uitgelijnde_tekst = f"{text:<10}"
 print(links_uitgelijnde_tekst)
 ```
 
@@ -499,7 +499,7 @@ print(links_uitgelijnde_tekst)
 
 ```python
 tekst = "Python"
-rechts_uitgelijnde_tekst = "{:>10}".format(tekst)
+rechts_uitgelijnde_tekst = f"{text:>10}"
 print(rechts_uitgelijnde_tekst)
 ```
 
@@ -530,7 +530,7 @@ Scripts vragen niet alleen input van een gebruiker, maar je kan ook argumenten m
 python3 omtrek.py 5 10
 ```
 
-Waarbij 5 de breedte en 10 de lengte van de rechthoek is. 
+Waarbij 5 de breedte en 10 de lengte van de rechthoek is.
 
 Je verwerkt dergelijke argumenten als volgt. In de module `sys` heb je de lijst `sys.argv`. Deze lijst bevat alle argumenten die zijn doorgegeven aan het script, inclusief de scriptnaam zelf als het eerste element (index 0) in de lijst.
 

@@ -230,6 +230,15 @@ python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 ```
+### Virtuele omgevingen in Spyder gebruiken
+
+Waneer we voor ons project een virtuele omgeving gecreëerd hebben, dan willen we ook dat Spyder de Pythonruntime van deze virtuele omgeving gebruikt. Hoe brengen we dat tot stand?
+
+- Je gaat naar "Preferences". Op Windows vind je dit onder "Tools", bij Mac in het menu "Spyder6".
+- Je kiest voor "Python interpreter".
+- Kies dan in plaats van "internal" voor "Use the following interpreter".
+- Kies de map waarin Python.exe zich bevindt binnen de verborgen map van je virtual environment.
+- Test dan of dit werkt, bijv. door een package te importeren dat je met pip geïnstalleerd hebt binnen je virtuele omgeving.
 
 ## Correct gebruik maken van packages
 

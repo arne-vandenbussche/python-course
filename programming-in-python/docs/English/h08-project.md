@@ -235,6 +235,16 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+### Use a virtual environment in Spyder
+
+When we've created a virtual environment, we want to use the Python runtime of this virtual environment. How can we do that?
+
+- Go to "Preferences" (Windows: Tools menu; Mac: Spyder6 menu).
+- Choose "Python interpreter"
+- Instead of "internal", choose "Use the following interpreter".
+- Choose in the hidden folder where your virtual environment is situated, the folder where you can find Python.exe.
+- Test this, by importing a package that is installed within the virtual environment.
+
 ## Use packages correctly
 
 Python code is stored in files with the extension.py. Python reads such a file and executes it. We call such a Python file a **script**. The code in a script is meant to be executed directly.

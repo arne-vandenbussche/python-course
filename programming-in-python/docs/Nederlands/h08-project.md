@@ -1,6 +1,6 @@
 # Een project bouwen in Python
 
-# Inleiding
+## Inleiding
 
 Wanneer we een meer complexe applicatie bouwen in Python, dan zijn er een aantal zaken waar we aandacht moeten aan besteden:
 
@@ -199,7 +199,7 @@ Wanneer we nu onze applicaties willen klaarmaken voor **deployment** op een serv
 - op onze server pullen we onze code in de repository op de server.
 - we vullen eventueel ons bestand met instellingen in.
 - we creëren een virtuele omgeving op de server.
-- we installeren de packages op basis van `requirements.txt'
+- we installeren de packages op basis van `requirements.txt`
 
 Dus, op onze **ontwikkelingsmachine**:
 
@@ -354,9 +354,70 @@ Een tweede optie is om bepaalde waarden bij te houden im **omgevingsvariabelen**
 
 ```python
 import os
-mijn_thuis_map = os.environ['HIOME']
+mijn_thuis_map = os.environ['HOME']
 ```
 
 Je kan dus ook omgevingsvariabelen voorzien voor diverse instellingen zoals je databaseconnectie.
 
+Een gelijkaardige aanpak is om gevoelige data in een verborgen bestand `.env` te bewaren, dat niet aanwezig is in je git-repository. Python bevat modules die dit bestand zonder moeite kunnen inlezen.
+
+```python
+from environs import Env # https://pypi.org/project/environs/
+
+env = Env()
+env.read_env() # read .env file if it exists
+
+db_host = env.str("DB_HOST")
+db_database = env.str("DB_DATABASE")
+db_port = env.int("DB_PORT")
+production = env.str("PRODUCTION")
+
+user_home = env("HOME")
+```
+
 Deze oplossingen zijn al een stuk veiliger. Voor het bewaren van een passwoord kan je nog een stap verder gaan, meer bepaald het paswoord bewaren in een zogenaamde "vault", een veilige plaats waar je wachtwoorden geëncrypteerd worden en die je met code kan aanroepen. Je vindt hiervoor heel wat oplossingen, zowel commercieel als open-source. Infisical is een voorbeeld van een open-source platform.
+
+## Hoe structureer je je code?
+
+Bij een project is het belangrijk om je code goed te structureren in packages (submappen) en modules (bestanden). Dit heeft heel wat voordelen:
+
+* **Duidelijkheid**: als je maanden later je code moet debuggen of uitbreiden, is het essentieel om snel te kunnen zien waar bepaalde onderdelen zich bevingn.
+* **Herbruikbaarheid**: door je code op te splisten in kleine eenheden, kan je die eenheden op diverse plaatsen binnen en buiten het project opnieuw gebruiken en vermijd je duplicatie van code.
+* **Testbaarheid**: kleine eenheden kan je gemakkelijker testen, o.a. via unit tests.
+* **Maintainability**: als je project een duidelijke structuur heeft, die bestaat uit kleinere eenheden, is het gemakkelijk om de code uit te breiden of bepaalde elementen (bijv. de UI, of de database) te vervangen.
+
+We hanteren hiervoor bepaalde vuistregels:
+
+* We zorgen dat ons project vertrekt vanuit één bestand main.py die zich in de hoofdmap bevindt.
+* **UI Layer**. We zorgen dat de user-interface gescheiden is van de rest. Alles wat te maken heeft met input en output zit apart. Deze onderdelen doen wel een eerste controle op de validiteit van de input, maar bevatten voor de rest niet zoveel businesslogica. Dit maakt het mogelijk om later de UI te veranderne, bijv. van een CLI-applicatie naar een desktopapplicatie, of een webapplicatie.
+* **Data Access Layer**. We voorzien de toegang tot de database in een aparte package, gescheiden van de rest. Dat maakt het gemakkelijk om de databasetoegang later te veranderen. Je zou kunnen starten met tekstbestanden als database, om dan later naar een relationele database over te schakelen. Het is zeker zo dat alle SQL-statements mooi samen zitten en niet verspreid zitten over het hele project. We zouden dit de Data Access Layer kunnen noemen.
+* **Domain Layer**. We voorzien klassen om de domeinobjecten te definiëren. Dit zijn de objecten waar de applicatie echt over gaat. We denken bijvoorbeeld aan klassen als Klant, Afspraak, Product, Bestelling. Dit kunnen vrij eenvoudige klassen zijn in de vorm van data classes.
+* **Serice Layer**. Complexe businesslogica, of het voorbereiden van data om die geschikt te maken voor output of voor opslag, situeren we in een aparte servicelaag.
+
+Door te modulariseren verminderen we de afhankelijkheid van modules ten opzichte van elkaar. 
+
+* De UI zal afhankelijk zijn (= beroep doen op) de servicelaag en domeinobjecten.
+* De servicelaag is afhankelijk van de Data Access Layer en de Domain Layer.
+* De Data Access Layer is enkel afhankelijk van de Domain Layer.
+
+Als we wijzigen doen aan de UI, zal geen enkele andere laag hiervan iets ondervinden. In de andere lagen probeer we concrete implementaties (bijv. welke database we hebben, of we SQL of een ORM-framework gebruiken, enzovoort) zoveel mogelijk te verbergen.
+
+Wijzigingen in de domainmodellen, in de Domain Layer, zullen wel een invloed hebben op elk niveau. Een goede functionele analyse en een goede data-analyse is dus essentieel.
+
+We kunnen de afhankelijkheden goed zien in onderstaande figuur:
+
+![Projectstructuur](./afbeeldingen/project_structure.jpg)
+
+Als je module `main` zich in de hoofdmap van je project bevindt, dan is de eenvoudigste manier om je project uit te voeren dit van die hoofdmap te doen.
+
+```bash
+python main.py
+```
+
+Bij grotere projecten is het mogelijk dat je bestand `main.py` zich bevindt in een package, bijv. cli_layer. In dat geval zal je je bestand moeten uitvoeren als een module:
+
+```bash
+python -m cli_package.main
+```
+
+Op die manier zorg je ervoor dat alle imports ook correct gebeuren.

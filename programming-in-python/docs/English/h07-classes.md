@@ -239,3 +239,56 @@ if __name__ == '__main__':
 
 We cannot create an object from the class `Vehicle` but we kan inherit from this class.
 
+## Data classes
+
+In many programs, we create classes that mainly store data — for example, to represent a Student, a Book, or a Point in 2D space. Such classes often contain only attributes and very little logic.
+In Python, there is a convenient shortcut for writing these data containers: the **data class**.
+
+A data class automatically generates several useful methods for you, such as `__init__()`, `__repr__()` and `__eq__()`. This makes your code shorter and clearer.
+
+To use data classes, import the dataclass decorator from the dataclasses module:
+
+```python
+from dataclasses import dataclass
+
+@dataclass
+class Student:
+    name: str
+    number: int
+    email: str
+```
+
+This automatically creates an initializer like:
+
+```python
+def __init__(self, name: str, number: int, email: str):
+    self.name = name
+    self.number = number
+    self.email = email
+```
+
+You can now create and print students easily:
+
+```python
+s1 = Student("Alice", 123, "alice@example.com")
+s2 = Student("Bob", 456, "bob@example.com")
+
+print(s1)
+# Output: Student(name='Alice', number=123, email='alice@example.com')
+```
+
+Data classes are especially useful for:
+
+- keeping your code concise,
+- comparing objects (they implement `__eq__` automatically),
+- or converting to and from dictionaries (using `dataclasses.asdict()`).
+
+Example:
+
+```python
+from dataclasses import asdict
+
+print(asdict(s1))
+# {'name': 'Alice', 'number': 123, 'email': 'alice@example.com'}
+```
+

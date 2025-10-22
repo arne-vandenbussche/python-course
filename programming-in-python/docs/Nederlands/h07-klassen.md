@@ -238,3 +238,56 @@ if __name__ == '__main__':
 
 We kunnen hier geen object van de klasse `Vehicle` definiëren, maar we kunnen wel overerven van die klasse.
 
+## Dataklassen
+
+In veel programma’s maken we klassen die vooral bedoeld zijn om gegevens bij te houden — bijvoorbeeld een Student, een Boek of een Punt in een vlak. Zulke klassen bevatten meestal enkel attributen en weinig logica.
+In Python bestaat er een handige manier om dit eenvoudiger te schrijven: de **dataclass**.
+
+Een dataclass maakt automatisch een aantal nuttige methodes aan, zoals `__init__()`, `__repr__()` en `__eq__()`. Daardoor wordt je code korter en overzichtelijker.
+
+Om een dataclass te gebruiken, importeer je de dataclass-decorator uit de module dataclasses:
+
+```python
+from dataclasses import dataclass
+
+@dataclass
+class Student:
+    naam: str
+    nummer: int
+    email: str
+```
+
+Hiermee wordt automatisch een constructor gegenereerd zoals:
+
+```python
+def __init__(self, naam: str, nummer: int, email: str):
+    self.naam = naam
+    self.nummer = nummer
+    self.email = email
+```
+
+Je kunt nu eenvoudig objecten aanmaken en afdrukken:
+
+```python
+s1 = Student("Alice", 123, "alice@example.com")
+s2 = Student("Bob", 456, "bob@example.com")
+
+print(s1)
+# Output: Student(naam='Alice', nummer=123, email='alice@example.com')
+```
+
+Dataclasses zijn vooral handig omdat ze:
+- je code korter en leesbaarder maken,
+- objecten automatisch kunnen vergelijken (`__eq__`),
+- en eenvoudig kunnen worden omgezet naar een dictionary (met `dataclasses.asdict()`).
+
+Voorbeeld:
+
+```python
+from dataclasses import asdict
+
+print(asdict(s1))
+# {'naam': 'Alice', 'nummer': 123, 'email': 'alice@example.com'}
+```
+
+

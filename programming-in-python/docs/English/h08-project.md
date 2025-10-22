@@ -1,6 +1,6 @@
 # Build an application in Python
 
-# Introduction
+## Introduction
 
 When we build a more complex application in Python, there are a few points of attention.
 
@@ -366,7 +366,6 @@ You can define and set your own environment variables for different settings suc
 
 A similar approach is to store sensitive data in a hidden file `.env` that is not committed to your git repo. There are modules that can easily read a file like that.
 
-These solutions are safer than keeping passwords in your code, but you can still make this safer by storing the password in a "vault", a safe place where passwords are encrypted and that you can query via code. There are a lot of solution, commercial as well as open-sourece. Infisical in an example of an open-source platform.
 
 ```python
 from environs import Env # https://pypi.org/project/environs/
@@ -382,3 +381,49 @@ production = env.str("PRODUCTION")
 user_home = env("HOME")
 ```
 
+These solutions are safer than keeping passwords in your code, but you can still make this safer by storing the password in a "vault", a safe place where passwords are encrypted and that you can query via code. There are a lot of solution, commercial as well as open-sourece. Infisical in an example of an open-source platform.
+
+## How to structure your code?
+
+In any project, it’s important to give your code a good structure using packages (subdirectories) and modules (files). This offers several advantages:
+
+- **Clarity**: when you need to debug or extend your code months later, it’s essential to quickly see where specific components are located.
+- **Reusability**: by splitting your code into small, focused units, you can reuse these units in different parts of the same project — or even across projects — while avoiding code duplication.
+- **Testability**: small units are easier to test, for example using unit tests.
+- **Maintainability**: when your project has a clear structure made up of smaller units, it becomes easier to extend the code or replace specific parts (for example, the UI or the database).
+
+We follow some general guidelines for this:
+
+- The project starts from a single file called main.py, located in the root directory.
+- **UI Layer** – The user interface is separated from the rest of the code. Everything related to input and output is placed in a separate module or package. These parts perform basic validation of the input, but contain little or no business logic. This separation makes it possible to later change the UI — for example, from a command-line application to a desktop or web application.
+- **Data Access Layer** – Database access is organized in a separate package, isolated from the rest of the project. This makes it easy to change how data is stored or retrieved. For instance, you could start with text files and later switch to a relational database. It also ensures that all SQL statements are kept together rather than scattered across the codebase. We call this the Data Access Layer.
+- **Domain Layer** – Here we define the classes that represent the core concepts of the application — the domain objects. Think of classes such as Customer, Appointment, Product, or Order. These are often simple classes, for example implemented as data classes.
+- **Service Layer** – More complex business logic, or code that prepares data for output or for storage, belongs in a separate service layer.
+
+By modularizing in this way, we reduce dependencies between modules.
+
+- The UI depends on (i.e., makes use of) the Service Layer and the Domain Layer.
+- The Service Layer depends on the Data Access Layer and the Domain Layer.
+- The Data Access Layer depends only on the Domain Layer.
+
+This means that if we make changes to the UI, no other layer is affected. In the other layers, we try to hide concrete implementation details as much as possible — for example, which database we use, or whether we work with SQL directly or an ORM framework.
+
+Changes in the domain models (in the Domain Layer) will, however, affect all layers. That’s why a good functional analysis and data analysis are essential.
+
+The dependencies are shown clearly in the diagram below:
+
+![Project structure](./images/project_structure.jpg)
+
+If your main module is in the root directory of your project, the simplest way to run your project is run main from the root.
+
+```bash
+python main.py
+```
+
+However, in larger projects, it is possible that you `main.py` is in a package, e.g. the package `cli_layer`. In that case you'd have to run is a a module:
+
+```bash
+python -m cli_package.main
+```
+
+This way, you can be sure that all import will be executed correctly.

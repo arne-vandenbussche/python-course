@@ -1,4 +1,3 @@
-
 # Collections: lists, tuples, sets, dictionaries
 
 ## Objectives
@@ -318,9 +317,7 @@ tuple_fruit = tuple_fruit[::-1]
 print(tuple_fruit) # ('mango', 'cherry', 'banana', 'apple')
 ```
 
-
-
-### Accessing elements
+### Querying the number of elements
 
 As with lists you can use the function **len()** to count the number of elements in the tuple.
 
@@ -333,6 +330,84 @@ print(len(t2)) # 3
 print(len(t3))  # 4
 ```
 
+Mind: the lenght of t3 is four, not five. The last element in the tuple is a tuple itself `("banana", 5)`, and that is one element.
+
+### The in-operator
+
+You can use the **in**-operator in a **for**-loop to go through the elements in your tuple, as with lists:
+
+
+```python
+t1 = ("apple", 3, 1.4, ("banana", 5))
+for element in t1:
+  print(element)
+```
+
+You can also use the **in**-operator to test whether an element is part of a tuple:
+
+```python
+t1 = ("apple", "banana", "cherry")
+print("banana" in t1) # True
+print("mango" in t1) # False
+```
+
+### Tuples and variable assignment
+
+As we mentioned earlier, Python gives you the possibility to put several variables at the left of the assignment symbol, and the same number of values at the right. Python will copy these values one by one to the variables at the left, in the same order. In the same way you can also put a tupple with the same number of elements at the left or the right of your assignment symbol. We call this unpacking.
+
+A few examples will illustrate this:
+
+```python
+a, b = "apple", "banana"
+print(a) # apple
+print(b) # banana
+
+(a, b) = "apple", "banana"
+print(a) # apple
+print(b) # banana
+
+a = 1, 2, 3
+print(a) # (1, 2, 3) 
+# a is a tuple with three elements
+
+t1, t2 = ("apple", "banana"), "cherry"
+print(t1) # ('apple', 'banana')
+print(t2) # cherry
+
+# unpack a tuple
+fruit = 'apple', 'banana', 'cherry'  # variabele fruit is a tuple with 3 elements
+print(fruit) # ('apple', 'banana', 'cherry')
+fruit1, fruit2, fruit3 = fruit  # assign the three elements of fruit to three different variables
+print(fruit2) # banana
+```
+
+### Tuples and functie return values
+
+Usually a function will return one value. If we wish to return several values, you can do that. In fact, your function will return a tuple.
+
+```python
+def stats(values):
+    m = min(values)
+    mx = max(values)
+    mn = sum(values) / len(values)
+    return m, mx, mn
+
+out = stats([1, 3, 5, 10])  # list as input
+print(out) # (1, 10, 4.75)
+print(type(out)) # <class 'tuple'>
+print()
+
+out = stats((10, 30, 50, 100))  # tuple as input
+print(out) # (10, 100, 47.5)
+print(type(out)) # <class 'tuple'>
+print()
+
+m, mx, mn = stats((1, 2, 3))  # output toekennen aan 3 variabelen
+print(m, mx, mn) # 1 3 2.0
+```
+
+### Select individual elements
+
 As with lists, you can access individual elements using the **index**. You can also use **slicing**.
 
 ```python
@@ -340,11 +415,34 @@ fruit = ("apple", "banana", "cherry", "strawberry")
 print(fruit[2])  # third element (cherry) as indices start at 0
 print(fruit[1:4]) # ('banana, 'cherry', 'strawberry')
 print(type(fruit[1:4])) # <class 'tuple'>
+print(fruit[1:]) #  ('banana, 'cherry', 'strawberry')
 print(fruit[1:3]) # ('banana', 'cherry')
 print(fruit[1:-1]) # ('banana', 'cherry')
 ```
 
 ### Iterating and searching in a tuple
+
+You can iterate through your tuple using indices:
+
+
+```python
+for i in range(len(fruit)):
+  print(fruit[i])
+
+print()
+
+i = 0
+while i < len(fruit):
+  print(fruit[i])
+  i += 1
+```
+
+Of course, the version with the in-operator is faster and cleaner.
+
+```python 
+for piece_of_fruit in fruit:
+    print(piece_of_fruit)
+```
 
 The **index()** method in tuples is used to find the first occurrence of a specified value and return its index (position). If the value is not found, it raises a ValueError.
 
@@ -359,6 +457,13 @@ If you want to specify the range within which to search, you can provide optiona
 ```python
 index_of_20 = my_tuple.index(20, 2)  # Start searching from index 2
 print(index_of_20) # 4
+```
+
+Tuples also have a **count()**-method:
+
+```python
+t = (1, 2, 3, 4, 3, 2, 1)
+print(t.count(3))  # geeft aan hoeveel keer het element 3 in de tuple voorkomt (2)
 ```
 
 You can check whether an element is present in a tuple using the in operator. This operator returns True if the element exists in the tuple and False if it does not.
@@ -381,8 +486,20 @@ Iterating through a tuple is similar to lists:
 my_tuple = (10, 20, 30, 40)
 
 # Iterating through the tuple, print elements separated by a tab
-for item in my_tuple:
+for item in my_tuple
     print(item, end="\t")
+```
+
+
+### Calculation in tuples
+
+Like with lists you can use functions such as **max()** and **min()** to calculate the maximum and minimum value within a tuple. There is also a function **sum()** to return the sum of all numeric elements in a tuple.
+
+```python
+t1 = (327, 419, 101, 667, 925, 225)
+print(max(t1)) # 925
+print(min(t1)) # 101
+print(sum(t1)) # 2664
 ```
 
 ### Concatenation and repetition
@@ -406,7 +523,7 @@ print(repeated_tuple) # (1, 2, 3, 1, 2, 3, 1, 2, 3)
 
 Repitition works with lists too.
 
-### Useful functions
+### Sort and reverse tuples 
 
 A tuple is immutable, so you can not change the tuple to sort is, but you can create a new sorted tuple.
 
@@ -414,30 +531,23 @@ A tuple is immutable, so you can not change the tuple to sort is, but you can cr
 print(sorted(fruit, reverse=True))
 ```
 
-The multiply-operator repeat tuples a number of times:
+Reversing a tuple can be done in two ways: using slicing or using the function `reversed`.
 
 ```python
-my_tuple = (1, 2, 3)
-
-repeated_tuple = my_tuple * 3
-print(repeated_tuple) # (1, 2, 3, 1, 2, 3, 1, 2, 3)
+t = (1, 2, 3, 4)
+reversed_t = t[::-1]
+print(reversed_t)   # (4, 3, 2, 1)
 ```
 
-As for lists, tuples with numerical values can be used with **sum()**, **max()** and **min()**.
+This is the simples and the fastest method. The slice [::-1] means: start from the end, move backwards by steps of -1.
 
 ```python
-t1 = (327, 419, 101, 667, 925, 225)
-print(max(t1)) # 925
-print(min(t1)) # 101
-print(sum(t1)) # 2664
+t = (1, 2, 3, 4)
+reversed_t = tuple(reversed(t))
+print(reversed_t)   # (4, 3, 2, 1)
 ```
 
-Tuples also have the function **count()**.
-
-```python
-words = ('traffic', 'crossing', 'car', 'bike', 'crossing', 'bike')
-print(words.count('bike')) # 2
-```
+The `reversed()` function returns an iterator, so you need to wrap it in `tuple()` to get a new tuple.
 
 ### Copy tuples
 
@@ -1294,4 +1404,24 @@ person_json = json.dumps(person) # '{"name": "John", "age": 30, "city": "New Yor
 
 # Convert JSON back to a dictionary
 person_dict = json.loads(person_json)
+```
+
+```bash
+[
+    {
+        "name": "John",
+        "age": 30,
+        "city": "New York"
+    },
+    {
+        "name": "Marie",
+        "age": 22,
+        "city": "Boston"
+    },
+    {
+        "name": "Mike",
+        "age": 32,
+        "city": "Chicago"
+    }
+]
 ```

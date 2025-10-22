@@ -152,7 +152,7 @@ lst2.insert(0, "Norbert")  # element wordt toegevoegd op positie 0
 print(lst2)
 ```
 
- ### Elementen verwijderen
+### Elementen verwijderen
 
 Met de methode **pop()** kan je een element uit de list halen, en dat element wordt geretourneerd:
 
@@ -301,16 +301,53 @@ print(t) # (2,)
 print(type(t)) # <class 'tuple'>
 ```
 
- Wanneer je zou schrijven
-
-> t = (2)
-
-dan zit in variabele t gewoon het getal 2, omdat je een getal met ronde haakjes mag omsluiten:
+Wanneer je zou schrijven `t = (2)`, dan zit in variabele t gewoon het getal 2, omdat je een getal met ronde haakjes mag omsluiten:
 
 ```python
 t = (2)
 print(t) # 2
 print(type(t)) # <class 'int'>
+```
+
+### Tuples zijn onveranderlijk
+
+Waar tuples verschillen van lists is dat ze **onveranderlijk** zijn. Dit commando geeft dus een foutmelding:
+
+```python
+fruit[-1] = "mango"
+```
+
+```
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-37-a16fa0115673> in <module>()
+----> 1 fruit[-1] = "mango"
+
+TypeError: 'tuple' object does not support item assignment
+```
+
+Omdat tuples onveranderlijk zijn, hebben ze geen methodes om elementen toe te voegen of te verwijderen.
+
+```python
+fruit.pop()
+```
+
+```
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-38-971343bd48cc> in <module>()
+----> 1 fruit.pop()
+
+AttributeError: 'tuple' object has no attribute 'pop'
+```
+
+Dit kan wel, maar denk eraan dat je in feite een nieuwe tuple toekent aan tuple_fruit:
+
+```python
+tuple_fruit = ("appel", "banaan", "kers", "mango")
+print(tuple_fruit) # ('appel', 'banaan', 'kers', 'mango')
+tuple_fruit = tuple_fruit[::-1]
+print(tuple_fruit) # ('mango', 'kers', 'banaan', 'appel')
 ```
 
 ### Aantal elementen opvragen
@@ -337,7 +374,6 @@ t1 = ("appel", 3, 1.4, ("banaan", 5))
 for element in t1:
   print(element)
 ```
-
 
 Met diezelfde **in**-operator kan je ook testen of een element onderdeel van een tuple is:
 
@@ -383,10 +419,10 @@ print(t2) # kers
  Tuples kan je trouwens ook 'unpacken':
 
 ```python
-abc = 'a', 'b', 'c'  # variabele abc bevat een tuple met 3 elementen
-print(abc) # ('a', 'b', 'c')
-a, b, c = abc  # ken de 3 elementen van abc toe aan 3 verschillende variabelen
-print(a, b, c) # a b c
+fruit = 'apple', 'banana', 'cherry'  # variabele fruit is een tuple met 3 elementen
+print(fruit) # ('apple', 'banana', 'cherry')
+fruit1, fruit2, fruit3 = fruit  # ken de 3 elementen van fruit toe aan 3 verschillende variabelen
+print(fruit2) # banana
 ```
 
 ###  Tuples en functie output
@@ -395,10 +431,10 @@ Zoals we eerder hebben gezien kunnen functies slechts één variabele  retourner
 
 ```python
 def stats(values):
-  m = min(values)
-  mx = max(values)
-  mn = sum(values) / len(values)
-  return m, mx, mn
+    m = min(values)
+    mx = max(values)
+    mn = sum(values) / len(values)
+    return m, mx, mn
 
 out = stats([1, 3, 5, 10])  # list as input
 print(out) # (1, 10, 4.75)
@@ -461,48 +497,60 @@ while i < len(fruit):
 
 De versie met in-operator is echter eenvoudiger en meer leesbaar. We raden deze ook aan.
 
-### Tuples zijn onveranderlijk
+```python 
+for piece_of_fruit in fruit:
+    print(piece_of_fruit)
+```
 
-Waar tuples verschillen van lists is dat ze **onveranderlijk** zijn. Dit commando geeft dus een foutmelding:
+The functie **index()** wordt gebruikt om de index van een element te bepalen, maar bepaald van de eerste keer dat dit element voorkomt. Als het element niet bestaat, dan krijgen we een ValueError.
+
 
 ```python
-fruit[-1] = "mango"
+my_tuple = (10, 20, 30, 40, 20)
+index_of_20 = my_tuple.index(20)
+print(index_of_20) # 1
 ```
 
-```
----------------------------------------------------------------------------
-TypeError                                 Traceback (most recent call last)
-<ipython-input-37-a16fa0115673> in <module>()
-----> 1 fruit[-1] = "mango"
-
-TypeError: 'tuple' object does not support item assignment
-```
-
-Omdat tuples onveranderlijk zijn, hebben ze geen methodes om elementen toe te voegen of te verwijderen.
+Je ook een gebied afbakenen waarbinnen je wil zoeken. Je kan de startpositie en de eindpositie meegeven.
 
 ```python
-fruit.pop()
+index_of_20 = my_tuple.index(20, 2)  # Start searching from index 2
+print(index_of_20) # 4
 ```
 
-```
----------------------------------------------------------------------------
-AttributeError                            Traceback (most recent call last)
-<ipython-input-38-971343bd48cc> in <module>()
-----> 1 fruit.pop()
-
-AttributeError: 'tuple' object has no attribute 'pop'
-```
-
-Dit kan wel, maar denk eraan dat je in feite een nieuwe tuple toekent aan tuple_fruit:
+Tuples hebben ook een **count()**-methode:
 
 ```python
-tuple_fruit = ("appel", "banaan", "kers", "mango")
-print(tuple_fruit) # ('appel', 'banaan', 'kers', 'mango')
-tuple_fruit = tuple_fruit[::-1]
-print(tuple_fruit) # ('mango', 'kers', 'banaan', 'appel')
+t = (1, 2, 3, 4, 3, 2, 1)
+print(t.count(3))  # geeft aan hoeveel keer het element 3 in de tuple voorkomt (2)
 ```
 
-### Enkele nuttige methodes en functies
+Zoals we eerder al opmerkten, kan je testen of een element voorkomt in een tuple, met de in-operator. Deze operator geeft True als het element voorkomt in de tuple en False als dat niet zo is:
+
+
+```python
+my_tuple = (10, 20, 30, 40)
+
+# ga na of 20 in het tuple voorkomt
+is_present = 20 in my_tuple
+print(is_present) # True
+
+# Ga na of 50 in het tupe voorkomt
+is_present = 50 in my_tuple
+print(is_present) # False
+```
+
+Zoals eerder vermeld, gebruiken we `in` ook om te itereren door een tuple.
+
+```python
+my_tuple = (10, 20, 30, 40)
+
+# Itereer door het tuple, druk de elementen af, gescheiden door tab.
+for item in my_tuple
+    print(item, end="\t")
+```
+
+### Rekenen met tuples
 
 Net als bij lists kan je de **max()** en de **min()** functies gebruiken om het maximum respectievelijk het minimum te  bepalen van een tuple die bestaat uit getallen. Je kunt de elementen van een tuple met numerieke elementen bij elkaar optellen met de **sum()** functie:
 
@@ -513,15 +561,7 @@ print(min(t1)) # 101
 print(sum(t1)) # 2664
 ```
 
- Tuples hebben ook een **count()** en **index()** methode:
-
-```python
-t = (1, 2, 3, 4, 3, 2, 1)
-print(t.count(3))  # geeft aan hoeveel keer het element 3 in de tuple voorkomt (2)
-print(t.index(2))  # geeft de (eerste) index weer van het element 2 (1)
-```
-
-### Tuples samenvoegen
+### Tuples samenvoegen en elementen herhalen
 
 Net als lists en strings, kan je tuples samenvoegen of concateneren met de plus-operator:
 
@@ -532,6 +572,43 @@ print(a + b) # (1, 2, 3, 4, 5)
 ```
 
 Het resultaat van a + b is een nieuwe tuple.
+
+Je kan de *-operator gebruiken om elementen te herhalen in een tuple.
+
+```python
+my_tuple = (1, 2, 3)
+
+repeated_tuple = my_tuple * 3
+print(repeated_tuple) # (1, 2, 3, 1, 2, 3, 1, 2, 3)
+```
+
+### Tuples sorteren en omkeren
+
+Tuples zijn onveranderlijk. Dit betekent dat je een tuple niet zomaar kan sorteren, maar wat je wel kan doen, is een nieuw gesorteerd tuple creëren.
+
+
+```python
+print(sorted(fruit, reverse=True))
+```
+
+Een tuple omkeren kan op twee manieren: met slicing of met de functie `reversed()`.
+
+```python
+t = (1, 2, 3, 4)
+reversed_t = t[::-1]
+print(reversed_t)   # (4, 3, 2, 1)
+```
+
+Dit is de eenvoudigste en snelste methode. De slice [::-1] betekent: begin bij het einde, en keer terug met stapjes van -1.
+
+
+```python
+t = (1, 2, 3, 4)
+reversed_t = tuple(reversed(t))
+print(reversed_t)   # (4, 3, 2, 1)
+```
+
+De functie `reversed()` geeft een iterator terug, dus moeten we die verpakken in `tuple()` om een tuple te krijgen.
 
 ### Tuples kopiëren
 
@@ -577,7 +654,7 @@ t = 1, 3, 5, 2, 6, 4
 t2 = tuple(sorted(list(t))) # (1, 2, 3, 4, 5, 6)
 ```
 
-# Sets
+## Sets
 
 Sets zijn ongeordende data structuren die alleen unieke elementen  kunnen bevatten. Slechts weinig programmeertalen ondersteunen het  gebruik van sets, maar Python doet het wel. Sets worden niet vaak  gebruikt, maar kunnen soms een handige oplossing geven voor een  probleem.
 
@@ -626,17 +703,12 @@ print(lege_set) # set()
 print(type(lege_set)) # <class 'set'>
 ```
 
- Het laatste voorbeeld toont aan dat in een set de elementen niet van hetzelfde datatype hoeven te zijn. De elementen moeten wel  onveranderlijk zijn. Daarom kan je een tuple als element opnemen, maar  geen list of set.
+ Het laatste voorbeeld toont aan dat in een set de elementen niet van hetzelfde datatype hoeven te zijn. De elementen moeten wel  onveranderlijk zijn. Daarom kan je een tuple als element opnemen, maar geen list of set.
 
 ```python
 print({1, 2, "abc", True, False, (1, 2, 3)}) # {False, 1, 2, 'abc', (1, 2, 3)}
-```
 
-```python
 print({1, 2, "abc", True, False, {1, 2, 3}})
-```
-
-```
 ---------------------------------------------------------------------------
 TypeError                                 Traceback (most recent call last)
 <ipython-input-65-4cad94302ef0> in <module>()
@@ -672,8 +744,6 @@ appel
 doerian
 ```
 
-
-
 Met de in-operator kan je ook nagaan of een element tot de set behoort:
 
 ```python
@@ -691,11 +761,6 @@ De in-operator is de enige manier toegang te krijgen tot de elementen van een se
 
 ```python
 fruitmand[2]
-```
-
-​
-
-```
 ---------------------------------------------------------------------------
 TypeError                                 Traceback (most recent call last)
 <ipython-input-70-f9ecc4e85d83> in <module>()
@@ -709,36 +774,23 @@ TypeError: 'set' object does not support indexing
 Met methode **add()** kan je elementen toevoegen aan een set:
 
 ```python
+fruitmand = { "appel", "banaan", "kers", "doerian", "mango" }
 fruitmand.add("peer")
-print(fruitmand)
-```
-
-```
-{'kers', 'mango', 'peer', 'banaan', 'appel', 'doerian'}
+print(fruitmand) # { "appel", "banaan", "kers", "doerian", "mango"i, "peer" }
 ```
 
 En met methode **remove()** kan je elementen verwijderen:
 
 ```python
 fruitmand.remove("doerian")
-print(fruitmand)
-```
-
-```
-{'kers', 'mango', 'peer', 'banaan', 'appel'}
+print(fruitmand) # { "appel", "banaan", "kers", "mango" }
 ```
 
 Je kan ook methode **pop()** gebruiken als je wil dat het laatst toegevoegde element wordt verwijderd en geretourneerd:
 
 ```python
 fruit = fruitmand.pop()
-print(fruitmand)
-print(fruit)
-```
-
-```
-{'mango', 'peer', 'banaan', 'appel'}
-kers
+print(fruitmand) # {'mango', 'banaan', 'appel'}
 ```
 
 Maar omdat een set ongeordend is, is het niet altijd duidelijk welk element er zal worden verwijderd door pop().
@@ -808,7 +860,7 @@ print(computers2)
 print(doorsnede)
 ```
 
-```
+```python
 {'Apple', 'Asus', 'HP', 'Dell'}
 {'Apple', 'HP', 'Acer', 'Lenovo'}
 {'Apple', 'HP'}
@@ -823,7 +875,7 @@ print(computers2)
 print(verschil)
 ```
 
-```
+```python
 {'Apple', 'Asus', 'HP', 'Dell'}
 {'Apple', 'HP', 'Acer', 'Lenovo'}
 {'Asus', 'Dell'}
@@ -906,7 +958,7 @@ for element in fruitlist:  # worden geordend doorlopen
   print(element)
 ```
 
-```
+```bash
 kers
 mango
 banaan
@@ -930,7 +982,7 @@ fruit2 = frozenset(["banaan", "kers", "doerian"])
 print(fruit1.union(fruit2))
 ```
 
-```
+```python
 frozenset({'banaan', 'appel', 'kers', 'doerian'})
 ```
 
@@ -939,7 +991,7 @@ frozenset({'banaan', 'appel', 'kers', 'doerian'})
 fruit1.add('peer')
 ```
 
-```
+```bash
 ---------------------------------------------------------------------------
 AttributeError                            Traceback (most recent call last)
 <ipython-input-83-88fc54476d6b> in <module>()
@@ -1404,7 +1456,7 @@ print(gesorteerde_letterbrij_als_string)
 # adefghijklmopqrstuyz
 ```
 
-### Filter() en map() met lambda-functies
+## Filter() en map() met lambda-functies
 
 Lamba-functies komen ook tot hun recht bij de functie `filter()` en `map()`. De eerste functie creëert een nieuwe lijst die een subset is van de vorige lijst, gebaseerd op een voorwaarde. De functie `map()` creëert een nieuwe lijst met een gewijzigde versie van de elementen uit de oorspronkelijke lijst.
 
@@ -1664,7 +1716,7 @@ for i in input:
 print(output)
 ```
 
-```
+```python
 {2, 4, 6}
 ```
 
@@ -1676,11 +1728,98 @@ Met een comprehension kan het uiteraard in één lijn:
 print({i for i in input if i % 2 == 0})
 ```
 
-```
+```python
 {2, 4, 6}
 ```
 
-# De module json
+## Verzamelingen uitpakken
+
+In Python, uitpakken of *unpacking* verwijst naar het proces waarbij we meerdere waarden in een collectie (zoals een list, tuple of gelijk welk iteraarbaar element) in één statement kunnen toekennen aan meerdere variabelen. Op die manier kunnen we sneller elementen uit een collectie halen.
+
+Je kan elementen van een tuple of een lijst direct toekennen aan meerdere variabelen.
+
+
+```python
+# A tuple met drie elementen
+person = ("John", 25, "Engineer")
+
+# Het tuple uitpakken in meerdere variabelen
+name, age, profession = person
+
+print(name)       # Output: John
+print(age)        # Output: 25
+print(profession) # Output: Engineer
+```
+
+
+```python
+# Een lijst met drie elementen
+numbers = [1, 2, 3]
+
+# de lijst uitpakken in meerdere variabelen
+a, b, c = numbers
+
+print(a)  # Output: 1
+print(b)  # Output: 2
+print(c)  # Output: 3
+```
+
+De operator * laat to om de resterende elementen op te vangen. Je kan dit gebruiken wanneer je niet precies weet hoeveel elementen er in een itereerbaar element zitten, of wanneer je slechts een deel van het itereerbaar element wil krijgen.
+
+
+```python
+numbers = [1, 2, 3, 4, 5]
+
+# We kennen het eerste element toe aan first, en de rest stoppen we in de lijst rest
+first, *rest = numbers
+
+print(first)  # Output: 1
+print(rest)   # Output: [2, 3, 4, 5]
+```
+
+```python
+numbers = [1, 2, 3, 4, 5]
+
+# We nemen het eerste element en kennen het toe aan first. Dan hebben we de lijst middle
+# met de middelste elementen, en het laatste element kennen we toe aan last.
+first, *middle, last = numbers
+
+print(first)   # Output: 1
+print(middle)  # Output: [2, 3, 4]
+print(last)    # Output: 5
+```
+
+Je kan dit principe gebruiken om een lijst of a dictionary door te geven aan een functie. De lijst of dictionary heeft de argumenten, als positionele argumenten (in dat geval gebruiken we * en een lijst of tuple), or als zogenaamde keyword arguments (in dat geval gebruiken we ** en een dictionary).
+
+In het volgende voorbeeld geven we de positionele argumenten x, y en z door. We noemen dit positionele argumenten omdat we ze geen naam geven, maar ze gewoon in dezelfde volgorde aanbieden. We gebruiken een asterisk (*) voor de lijst van argumenten.
+
+
+```python
+def add(x, y, z):
+    return x + y + z
+
+numbers = [1, 2, 3]
+
+# Unpacking the list into the function arguments
+result = add(*numbers)
+print(result)  # Output: 6
+```
+
+In het volgende voorbeeld geven we een dictionary door die voor elke argument de naam van het argument geeft, en de waarde. We noemen dit keyword arguments (kwargs). We gebruiken een ** voor de dictionary van argumentens.
+
+
+```python
+def greet(name, age):
+    return f"Hello, {name}. You are {age} years old."
+
+person_info = {"name": "Alice", "age": 30}
+
+# Unpacking the dictionary into keyword arguments
+message = greet(**person_info)
+print(message)  # Output: Hello, Alice. You are 30 years old.
+```
+
+## De module JSON
 
 Wanneer we nu data opvragen aan een website via een API, dan krijgen  we die data vaak in JSON formaat aangeboden. JSON wordt gebruikt om  informatie op te slaan in een eenvoudig georganiseerde manier. De file  is leesbaar, en kan logisch opgeroepen worden. De grootste voordelen  zijn:
 
@@ -1741,7 +1880,7 @@ json_string = json.dumps(data, indent=4)  # `indent=4` will make the output nice
 print(json_string)
 ```
 
-```
+```bash
 [
     {
         "name": "John",

@@ -156,7 +156,7 @@ if __name__ == '__main__':
     terminator.say_hello()
 ```
 
-# Klasseattributen en klassemethodes
+## Klasseattributen en klassemethodes
 
 Klasseattributten en klassemethodes horen niet bij objecten van de klasse, maar bij de klasse zelf. We weten dat we hiermee zuinig moeten omgaan, maar Python voorziet deze mogelijkheid wel. We noemen deze ook statische attributen of statische methodes.
 

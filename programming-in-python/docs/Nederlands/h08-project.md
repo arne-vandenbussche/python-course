@@ -27,7 +27,7 @@ Na het bestuderen van dit hoofstuk kan je:
 
 ## Git en .gitignore
 
-###  Git
+### Git
 
 Professionele systeembeheerders en softwareontwikkelaars houden hun code altijd bij een versiebeheersysteem. Er bestaat hier een brede keuze aan mogelijkheden, maar sinds de ontwikkeling van git door Linus Thorvalds is dit de de facto standaard geworden. Wij zullen dus gebruik maken van Git als versiebeheersysteem.
 
@@ -141,8 +141,6 @@ settings.py
 env/
 venv/
 ```
-
-
 
 ## Een virtuele omgeving creëren met venv
 

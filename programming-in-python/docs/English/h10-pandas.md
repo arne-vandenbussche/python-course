@@ -39,7 +39,7 @@ We will import Pandas into our Python script.
 import pandas as pd # we give Pandas the alias pd by convention
 ```
 
-# Data structures in Pandas
+## Data structures in Pandas
 
 The two bacic data structures in Pandas are: `Series` and `DataFrame`.
 

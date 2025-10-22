@@ -156,7 +156,7 @@ if __name__ == '__main__':
     terminator.say_hello()
 ```
 
-# Class attributes and class methods
+## Class attributes and class methods
 
 Class attributes and class methods do not belong to objects of the class, but to the class itself. We know that we have to use these sparingly, but Python does provide them. We also call these static attributes or static methods.
 We simply define a static attribute in the class without preceding it with the keyword `self`. 

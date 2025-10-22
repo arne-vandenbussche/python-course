@@ -39,7 +39,7 @@ In ons Pythonbestand zullen we dan Pandas importeren.
 import pandas as pd # we noemen het pakket pd bij conventie
 ```
 
-# Datastructuren in Pandas
+## Datastructuren in Pandas
 
 De twee basis datastructuren die pandas gebruikt zijn: `Series` en `DataFrame`.
 

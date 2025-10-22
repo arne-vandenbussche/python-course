@@ -1,4 +1,4 @@
-# Manipulate and visualize number with NumPy and Plo
+# Manipulate and visualize number with NumPy and Plot
 
 ## Objective
 

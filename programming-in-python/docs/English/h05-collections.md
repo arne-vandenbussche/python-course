@@ -1119,7 +1119,12 @@ print(sorted_string)
 
 In Python, lambda functions are anonymous functions (i.e., functions without a name) that are defined using the lambda keyword. They are often used with functions like filter() and sort() because they allow you to write simple, concise functions without having to define a separate function using def.
 
-The filter() function is used to filter elements from an iterable (like a list) based on a condition. It takes two arguments: a function (which returns either True or False for each element) and an iterable. The elements for which the function returns True are included in the result.
+The filter() function is used to filter elements from an iterable (like a list) based on a condition. It takes two arguments: 
+
+* a function (which returns either True or False for each element) and 
+* an iterable. The elements for which the function returns True are included in the result.
+
+The result returned is an iterator, a filter object. You might have to convert in into a list or tuple, or whatever collection you want to use.
 
 A lambda function is often used with filter() to define a condition without needing a separate function.
 
@@ -1155,6 +1160,16 @@ sorted_people = sorted(people, key=lambda person: person[0], reverse=True)
 
 print(sorted_people) # Output: [('Charlie', 30), ('Bob', 20), ('Alice', 25)]
 ```
+
+
+You can also sort with multiple keys. Then your lambda function must return a tuple: 
+
+people = [("Alice", 25), ("Bob", 20), ("Charlie", 30), ("Aisha", 30)]
+
+# Using sorted() with lambda to sort by name (first element) in reverse order
+sorted_people = sorted(people, key=lambda person: (person[1], person[0]), reverse=False)
+
+print(sorted_people) # Output: [('Bob', 20), ('Alice', 25), ('Aisha', 30), ('Charlie', 30)]
 
 The map() function in Python is used to apply a given function to every item of an iterable (like a list) and return an iterator of the results. It allows you to transform elements in an iterable by applying the function to each one. A lambda function is often used with map() to create simple and inline transformations without defining a separate function. The syntax is:
 
